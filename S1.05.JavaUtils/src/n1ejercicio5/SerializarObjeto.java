@@ -1,37 +1,51 @@
 package n1ejercicio5;
 import java.io.Serializable;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class SerializarObjeto implements Serializable {
 	public static void main(String[] args) {
-        // Serializar un objeto
         Objeto objeto = new Objeto("Juan", 25);
-        try {
-        	FileOutputStream archivoSalida = new FileOutputStream("objeto.ser");
-            ObjectOutputStream salidaObjeto = new ObjectOutputStream(archivoSalida);
-            salidaObjeto.writeObject(objeto);
-            salidaObjeto.close();
-            archivoSalida.close();
-            System.out.println("Objeto serializado en objeto.ser");
-            } catch (Exception e) {
-            	System.out.println("Error al leer el archivo: " + e.getMessage());
-            	}
-        
-        // Deserializar un objeto
-        Objeto objetoDeserializado = null;
-        try {
-            FileInputStream archivoEntrada = new FileInputStream("miobjeto.ser");
-            ObjectInputStream entradaObjeto = new ObjectInputStream(archivoEntrada);
-            objetoDeserializado = (Objeto) entradaObjeto.readObject();
-            entradaObjeto.close();
-            archivoEntrada.close();
-            System.out.println("Objeto deserializado desde miobjeto.ser");
-            } catch (Exception e) {
-        	System.out.println("Error al leer el archivo: " + e.getMessage());
-        	} 
-        }
-}
+        serializar(objeto);
+        deserializar(objeto);
+	}
+    
+	static void serializar(Objeto objeto) {
+		try{
+			FileOutputStream archivo = new FileOutputStream("objeto.ser");
+        	ObjectOutputStream salida = new ObjectOutputStream(archivo);
+        	salida.writeObject(objeto);
+        	salida.close();
+        	archivo.close();
+        	System.out.println("Datos guardados en objeto.ser");
+        	}
+		catch (IOException i){
+			i.printStackTrace();
+		}
+	}
+	
+	
+	static void deserializar (Objeto objeto) {
+		try{
+			FileInputStream archivo = new FileInputStream("objeto.ser");
+			ObjectInputStream entrada = new ObjectInputStream(archivo);
+			objeto = (Objeto) entrada.readObject();
+			entrada.close();
+			archivo.close();
+			}
+		catch(IOException i){
+			i.printStackTrace();
+			}
+		catch(ClassNotFoundException c){
+			System.out.println("Clase Objeto no encontrada");
+			c.printStackTrace();
+			}
+		System.out.println("Objeto deserializado. ");
+		}
+	}
+	
+	
+
 		

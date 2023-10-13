@@ -14,12 +14,12 @@ import java.io.Serializable;
 	        return nombre;
 	    }
 
-	    public void setNombre(String nombre) {
-	        this.nombre = nombre;
-	    }
-
 	    public int getEdad() {
 	        return edad;
+	    }
+	    
+	    public void setNombre(String nombre) {
+	        this.nombre = nombre;
 	    }
 
 	    public void setEdad(int edad) {
