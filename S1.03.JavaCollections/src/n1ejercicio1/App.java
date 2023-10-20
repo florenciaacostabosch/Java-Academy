@@ -7,8 +7,6 @@ public class App {
 	public static void main(String[] args) {
 
 	ArrayList<String> month = new ArrayList<String>();
-	
-	//añadir 11 meses sin agosto
 	month.add("Enero");
 	month.add("Febrero");
 	month.add("Marzo");
